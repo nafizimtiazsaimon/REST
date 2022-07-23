@@ -40,7 +40,8 @@ router.get('/:postId', async (req, res) => {
 router.delete('/:postId', async (req, res) => {
     try{
         const removedPost = await Post.remove({ _id: req.params.postId });
-        res.json(removedPost);
+        res.send({message: `User with the id ${req.params.postId} has been deleted`}); // postman response
+        //res.json(removedPost);
     }catch(err){
         res.json({ message: err});
     }
@@ -53,7 +54,8 @@ router.patch('/:postId', async (req, res) => {
             { _id: req.params.postId },
             {$set: {title: req.body.title, description: req.body.description}}
         );
-        res.json(updatedPost);
+        //res.json({message: 'User with the id ${postId} has been updated', updatedPost});
+        res.send({message: `User with the id ${req.params.postId} has been updated`}); // postman response
     }catch(err){
         res.json({ message: err});
     }
